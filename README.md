@@ -392,15 +392,12 @@ We welcome contributions! Here's how:
 
 ---
 
-## 👥 Team
+## 👥 Owner 
 
-**Project Lead**: [Your Name]
-**Repository**: https://github.com/sumitkumar5868/Truth_Scanner
+**Project Lead**: Sumit kumar
+**Date**: 10/02/2026
 
-### Hackathon Information
-- **Event**: [Hackathon Name]
-- **Category**: [Category]
-- **Date**: [Date]
+
 
 ---
 
@@ -421,12 +418,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/sumitkumar5868/Truth_Scanner/issues)
-- **Email**: [your-email@example.com]
-- **Documentation**: [docs/](docs/)
+- **Email**: [sumitytvlog3@gmail.com]
+
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️Future Roadmap
 
 - [ ] Add machine learning model training
 - [ ] Multi-language support
