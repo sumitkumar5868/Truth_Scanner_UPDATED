@@ -1,0 +1,46 @@
+# Truth Scanner Pro - Python Dependencies
+# Version: 2.0.0
+
+# Core Dependencies (Required for API server)
+flask==3.0.0
+werkzeug==3.0.0
+
+# Optional Dependencies (Recommended for production)
+
+# Database
+# Already using SQLite (built-in)
+
+# API & Web
+requests==2.31.0          # For API client usage
+flask-cors==4.0.0         # CORS support
+
+# Data Processing (Optional)
+pandas==2.1.4            # Data analysis
+numpy==1.26.2            # Numerical computing
+
+# Export & Reporting (Optional)
+markdown==3.5.1          # Markdown generation
+jinja2==3.1.2           # Template engine (included with Flask)
+
+# Testing (Development only)
+pytest==7.4.3           # Testing framework
+pytest-cov==4.1.0       # Coverage reporting
+
+# Production Server (Optional)
+gunicorn==21.2.0        # WSGI server for production
+gevent==23.9.1          # Async support
+
+# Monitoring (Optional)
+prometheus-client==0.19.0  # Metrics collection
+
+# ML Dependencies (Future - Phase 3)
+# transformers==4.36.2   # BERT models
+# torch==2.1.2          # PyTorch
+# scikit-learn==1.3.2   # ML utilities
+# spacy==3.7.2          # NLP
+
+# Development Tools (Optional)
+black==23.12.1          # Code formatting
+flake8==7.0.0          # Linting
+mypy==1.7.1            # Type checking
+python-dotenv==1.0.0

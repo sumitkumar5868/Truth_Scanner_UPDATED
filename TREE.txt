@@ -1,0 +1,106 @@
+Truth_Scanner_Organized/
+│
+├── 📄 README.md                      # Main project documentation
+├── 📄 SETUP.md                       # Quick setup guide (5 minutes)
+├── 📄 PROJECT_STRUCTURE.md           # Detailed structure documentation
+├── 📄 API_EXAMPLES.md                # Complete API usage guide
+├── 📄 CONTRIBUTING.md                # Contribution guidelines
+├── 📄 LICENSE                        # MIT License
+│
+├── 📄 run.py                         # ⭐ Application entry point - START HERE!
+├── 📄 requirements.txt               # Python dependencies
+├── 📄 .env.example                   # Environment variables template
+├── 📄 .gitignore                     # Git ignore rules
+│
+├── 📄 Dockerfile                     # Docker container configuration
+├── 📄 docker-compose.yml             # Docker Compose orchestration
+│
+├── 📁 backend/                       # Python Backend Code
+│   ├── 📄 __init__.py                # Backend package init
+│   │
+│   ├── 📁 api/                       # REST API Layer
+│   │   ├── 📄 __init__.py
+│   │   └── 📄 api.py                 # Flask API (routes, auth, rate limiting)
+│   │
+│   ├── 📁 models/                    # AI/ML Models & Core Logic
+│   │   ├── 📄 __init__.py
+│   │   └── 📄 truth_scanner.py       # Main detection engine (pattern matching)
+│   │
+│   ├── 📁 database/                  # Database Management
+│   │   ├── 📄 __init__.py
+│   │   └── 📄 db_manager.py          # SQLite operations (CRUD, queries)
+│   │
+│   └── 📁 utils/                     # Utility Functions
+│       ├── 📄 __init__.py
+│       └── 📄 export_manager.py      # Export to JSON, CSV, PDF, Markdown
+│
+├── 📁 frontend/                      # Web Interface
+│   ├── 📄 index.html                 # Main HTML page
+│   ├── 📁 css/
+│   │   └── 📄 style.css              # All styles (extracted & organized)
+│   └── 📁 js/
+│       └── 📄 app.js                 # All JavaScript (extracted & organized)
+│
+├── 📁 config/                        # Configuration Management
+│   ├── 📄 __init__.py
+│   └── 📄 config.py                  # Environment-based configuration
+│
+├── 📁 docs/                          # Documentation
+│   ├── 📄 DEPLOYMENT_GUIDE.md        # Production deployment guide
+│   ├── 📄 FEATURES.md                # Feature documentation
+│   └── 📄 UPGRADE_SUMMARY.md         # Version history
+│
+├── 📁 data/                          # Runtime Data (auto-created)
+│   ├── truth_scanner.db              # SQLite database (auto-created on first run)
+│   ├── 📁 backups/                   # Database backups
+│   └── 📁 exports/                   # Exported reports
+│
+└── 📁 tests/                         # Test Suite
+    ├── 📄 __init__.py
+    └── 📄 test_scanner.py            # Sample tests
+
+════════════════════════════════════════════════════════════════════════
+
+QUICK START GUIDE:
+
+1. Setup Environment:
+   python -m venv venv
+   source venv/bin/activate  (Windows: venv\Scripts\activate)
+
+2. Install Dependencies:
+   pip install -r requirements.txt
+
+3. Run Application:
+   python run.py
+
+4. Open Browser:
+   http://localhost:5000
+
+════════════════════════════════════════════════════════════════════════
+
+KEY FILES TO UNDERSTAND:
+
+📍 run.py                              → Start here! Main entry point
+📍 backend/models/truth_scanner.py     → Core AI detection logic
+📍 backend/api/api.py                  → REST API endpoints
+📍 frontend/index.html                 → Web interface
+📍 README.md                           → Complete documentation
+
+════════════════════════════════════════════════════════════════════════
+
+HACKATHON PRESENTATION TIPS:
+
+✅ Show the clean, organized structure
+✅ Demonstrate separation of concerns (Frontend/Backend/Config)
+✅ Highlight modularity and scalability
+✅ Emphasize production-ready code
+✅ Showcase comprehensive documentation
+
+════════════════════════════════════════════════════════════════════════
+
+Total Files: 40+
+Lines of Code: ~2000+ (properly organized)
+Documentation: 6 comprehensive guides
+Architecture: Production-ready, modular, scalable
+
+Built with ❤️ for Truth and Transparency

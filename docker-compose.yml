@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  truth-scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: truth-scanner-pro
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=False
+      - APP_PORT=5000
+      - APP_HOST=0.0.0.0
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - truth-scanner-network
+
+networks:
+  truth-scanner-network:
+    driver: bridge
+
+volumes:
+  data:
+  logs:

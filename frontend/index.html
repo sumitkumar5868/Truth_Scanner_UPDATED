@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Scanner Pro - Enterprise AI Confidence Detection</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔍 Truth Scanner<span class="version">PRO</span></h1>
+            <p>Enterprise-Grade AI Confidence Detection System</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span id="totalAnalyses">0</span> Analyses
+                </div>
+                <div class="stat-item">
+                    <span id="avgScore">0</span> Avg Score
+                </div>
+                <div class="stat-item">
+                    <span id="highRiskCount">0</span> High Risk
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('single')">
+                📝 Single Analysis
+            </button>
+            <button class="tab-btn" onclick="switchTab('batch')">
+                📦 Batch Processing
+            </button>
+            <button class="tab-btn" onclick="switchTab('api')">
+                🔌 API Integration
+            </button>
+            <button class="tab-btn" onclick="switchTab('history')">
+                📚 History
+            </button>
+            <button class="tab-btn" onclick="switchTab('settings')">
+                ⚙️ Settings
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Single Analysis Tab -->
+            <div id="tab-single" class="tab-content active">
+                <div class="analysis-grid">
+                    <!-- Input Panel -->
+                    <div class="input-panel">
+                        <h2 class="panel-title">📄 Input Text</h2>
+                        <textarea id="inputText" placeholder="Paste AI-generated text here for analysis...
+
+Example: 'Climate change is definitely caused by human activity. Scientists universally agree that global temperatures will certainly rise by 5 degrees by 2050.'"></textarea>
+                        
+                        <div class="quick-actions">
+                            <button class="btn-primary" onclick="analyzeText()">
+                                🔍 Analyze Text
+                            </button>
+                            <button class="btn-secondary btn-small" onclick="loadExample('high')">
+                                Example: High Risk
+                            </button>
+                            <button class="btn-secondary btn-small" onclick="loadExample('low')">
+                                Example: Low Risk
+                            </button>
+                            <button class="btn-secondary btn-small" onclick="clearInput()">
+                                🗑️ Clear
+                            </button>
+                        </div>
+
+                        <!-- Character count -->
+                        <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                            Characters: <span id="charCount">0</span> | Words: <span id="wordCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Results Panel -->
+                    <div class="results-panel">
+                        <h2 class="panel-title">📊 Analysis Results</h2>
+                        <div id="resultsContainer">
+                            <div style="text-align: center; padding: 60px 20px; color: #999;">
+                                <div style="font-size: 4em; margin-bottom: 20px;">🔍</div>
+                                <p style="font-size: 1.1em;">Enter text and click "Analyze" to see results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlighted Text Section -->
+                <div id="highlightedSection" style="display: none; margin-top: 30px;">
+                    <h2 class="panel-title">🎨 Highlighted Analysis</h2>
+                    <div class="highlighted-text" id="highlightedText"></div>
+                    <div style="display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="highlight-certainty" style="display: inline-block; width: 20px; height: 20px;"></span>
+                            <span>Certainty Markers</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="highlight-evidence" style="display: inline-block; width: 20px; height: 20px;"></span>
+                            <span>Evidence Markers</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="highlight-claim" style="display: inline-block; width: 20px; height: 20px;"></span>
+                            <span>Verifiable Claims</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Section -->
+                <div id="exportSection" class="export-section" style="display: none;">
+                    <h3 style="margin-bottom: 15px; color: var(--dark);">📥 Export Results</h3>
+                    <div class="export-formats">
+                        <button class="export-btn" onclick="exportResults('json')">
+                            📄 JSON
+                        </button>
+                        <button class="export-btn" onclick="exportResults('csv')">
+                            📊 CSV
+                        </button>
+                        <button class="export-btn" onclick="exportResults('html')">
+                            🌐 HTML Report
+                        </button>
+                        <button class="export-btn" onclick="exportResults('txt')">
+                            📝 Text Summary
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Processing Tab -->
+            <div id="tab-batch" class="tab-content">
+                <h2 class="panel-title">📦 Batch File Processing</h2>
+                <p style="color: #666; margin-bottom: 20px;">Upload multiple text files for batch analysis. Supports .txt files.</p>
+                
+                <div class="file-upload" id="dropZone">
+                    <input type="file" id="fileInput" multiple accept=".txt" onchange="handleFiles(this.files)">
+                    <div class="upload-icon">📁</div>
+                    <h3>Drag & Drop Files Here</h3>
+                    <p style="color: #666; margin-top: 10px;">or click to browse</p>
+                    <button class="btn-primary" style="margin-top: 20px;" onclick="document.getElementById('fileInput').click()">
+                        Choose Files
+                    </button>
+                </div>
+
+                <div class="batch-results" id="batchResults"></div>
+            </div>
+
+            <!-- API Integration Tab -->
+            <div id="tab-api" class="tab-content">
+                <h2 class="panel-title">🔌 API Integration</h2>
+                
+                <div class="api-section">
+                    <h3 style="margin-bottom: 15px;">REST API Endpoint</h3>
+                    <div class="api-endpoint">
+                        POST https://api.truthscanner.ai/v1/analyze
+                    </div>
+                    <p style="margin-top: 10px; opacity: 0.8;">
+                        API Key: <code style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px;">ts_demo_key_12345</code>
+                    </p>
+                </div>
+
+                <h3 style="margin: 25px 0 15px; color: var(--dark);">Request Examples</h3>
+                
+                <div class="code-block">
+                    <pre>// JavaScript/Node.js
+const response = await fetch('https://api.truthscanner.ai/v1/analyze', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ts_demo_key_12345'
+  },
+  body: JSON.stringify({
+    text: "Your AI-generated text here",
+    options: {
+      detailed: true,
+      highlight: true
+    }
+  })
+});
+
+const result = await response.json();
+console.log(result.score, result.risk);</pre>
+                </div>
+
+                <div class="code-block">
+                    <pre># Python
+import requests
+
+response = requests.post(
+    'https://api.truthscanner.ai/v1/analyze',
+    headers={
+        'Authorization': 'Bearer ts_demo_key_12345',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'text': 'Your AI-generated text here',
+        'options': {
+            'detailed': True,
+            'highlight': True
+        }
+    }
+)
+
+result = response.json()
+print(f"Score: {result['score']}, Risk: {result['risk']}")</pre>
+                </div>
+
+                <h3 style="margin: 25px 0 15px; color: var(--dark);">Response Format</h3>
+                
+                <div class="code-block">
+                    <pre>{
+  "score": 92,
+  "risk": "HIGH RISK",
+  "ratio": "3:0",
+  "certainty_markers": ["definitely", "universally", "certainly"],
+  "evidence_markers": [],
+  "claims": ["5 degrees", "2050"],
+  "statistics": {
+    "words": 156,
+    "sentences": 8,
+    "avg_words_per_sentence": 19.5
+  },
+  "interpretation": "This text shows strong signs...",
+  "highlighted_html": "&lt;span class='high-risk'&gt;...&lt;/span&gt;",
+  "timestamp": "2026-02-09T10:30:45Z"
+}</pre>
+                </div>
+
+                <div style="background: var(--light); padding: 20px; border-radius: 10px; margin-top: 25px;">
+                    <h3 style="color: var(--dark); margin-bottom: 15px;">Rate Limits</h3>
+                    <ul style="padding-left: 20px; color: #666;">
+                        <li>Free tier: 100 requests/hour</li>
+                        <li>Pro tier: 1,000 requests/hour</li>
+                        <li>Enterprise: Unlimited</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="tab-history" class="tab-content">
+                <h2 class="panel-title">📚 Analysis History</h2>
+                <p style="color: #666; margin-bottom: 20px;">View and manage your previous analyses</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="btn-secondary btn-small" onclick="clearHistory()">
+                        🗑️ Clear History
+                    </button>
+                    <button class="btn-secondary btn-small" onclick="exportHistory()">
+                        📥 Export All
+                    </button>
+                </div>
+
+                <div id="historyContainer">
+                    <div style="text-align: center; padding: 60px 20px; color: #999;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">📚</div>
+                        <p style="font-size: 1.1em;">No analysis history yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="tab-settings" class="tab-content">
+                <h2 class="panel-title">⚙️ Detection Settings</h2>
+                <p style="color: #666; margin-bottom: 25px;">Customize the analysis parameters</p>
+                
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3>Certainty Weight</h3>
+                        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">
+                            How much certainty markers affect the final score
+                        </p>
+                        <div class="slider-container">
+                            <label>
+                                Weight: <span class="slider-value" id="certaintyWeightValue">50%</span>
+                            </label>
+                            <input type="range" id="certaintyWeight" min="0" max="100" value="50" 
+                                   oninput="updateSlider('certaintyWeight', this.value)">
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3>Evidence Weight</h3>
+                        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">
+                            How much missing evidence affects the score
+                        </p>
+                        <div class="slider-container">
+                            <label>
+                                Weight: <span class="slider-value" id="evidenceWeightValue">30%</span>
+                            </label>
+                            <input type="range" id="evidenceWeight" min="0" max="100" value="30" 
+                                   oninput="updateSlider('evidenceWeight', this.value)">
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3>Claim Weight</h3>
+                        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">
+                            How much verifiable claims affect the score
+                        </p>
+                        <div class="slider-container">
+                            <label>
+                                Weight: <span class="slider-value" id="claimWeightValue">20%</span>
+                            </label>
+                            <input type="range" id="claimWeight" min="0" max="100" value="20" 
+                                   oninput="updateSlider('claimWeight', this.value)">
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3>Risk Thresholds</h3>
+                        <p style="color: #666; font-size: 0.9em; margin-bottom: 15px;">
+                            Define score ranges for risk levels
+                        </p>
+                        <div class="slider-container">
+                            <label>
+                                High Risk: <span class="slider-value" id="highThresholdValue">70+</span>
+                            </label>
+                            <input type="range" id="highThreshold" min="50" max="90" value="70" 
+                                   oninput="updateSlider('highThreshold', this.value)">
+                        </div>
+                        <div class="slider-container">
+                            <label>
+                                Medium Risk: <span class="slider-value" id="mediumThresholdValue">40+</span>
+                            </label>
+                            <input type="range" id="mediumThreshold" min="20" max="70" value="40" 
+                                   oninput="updateSlider('mediumThreshold', this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <button class="btn-primary" onclick="resetSettings()">
+                        🔄 Reset to Defaults
+                    </button>
+                    <button class="btn-secondary" onclick="saveSettings()">
+                        💾 Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
